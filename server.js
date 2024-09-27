@@ -1,11 +1,17 @@
 const express = require('express');
 const app = express();
+const userRoutes = require('./routes/userRoutes');
+//const bcrypt = require('bcrypt');
 require('dotenv').config();
 const {MONGO_IP, MONGO_PORT, MONGO_USER, MONGO_PASSWORD} = require("./config/config");
 MONGO_URL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`
 
 const mongoose = require('mongoose');
+
+app.use(express.json());
+
 mongoose.connect(
+    //"mongodb://root:root@172.29.0.3:27017/?authSource=admin"
     //"mongodb://root:root@mongo:27017/?authSource=admin"
     MONGO_URL)
     .then(() => {
@@ -14,6 +20,9 @@ mongoose.connect(
     .catch((e) => {
         console.log("Error connecting to MongoDB: ", e);
     })
+    
+//user Routes
+app.use('/api/users', userRoutes);
 
 // Root route
 app.get('/', (req, res) => {
