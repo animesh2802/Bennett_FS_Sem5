@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const userRoutes = require('./routes/userRoutes');
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 require('dotenv').config();
 const {MONGO_IP, MONGO_PORT, MONGO_USER, MONGO_PASSWORD} = require("./config/config");
 MONGO_URL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`
